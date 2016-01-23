@@ -1,12 +1,7 @@
 'use strict';
 
-var express = require('express');
-var app = express();
-
-app.use(express.static('public'));
-
-
-app.get('/:date', function(req, res) {
+exports.module = function(app){
+    app.get('/:date', function(req, res) {
         var date = req.params.date;
         var unix = null;
         var natural = null;
@@ -18,7 +13,7 @@ app.get('/:date', function(req, res) {
         } 
         
         // Check for initial natural time
-        if (isNaN(+date) && moment(date, "MMMM D, YYYY").isValid()) {
+        if (isNaN(+date) && (date, "MMMM D, YYYY").isValid()) {
             unix = natToUnix(date);
             natural = unixToNat(unix);
         }
@@ -43,9 +38,4 @@ app.get('/:date', function(req, res) {
         second: unix.getSeconds()
     };
     }
-    
-
-app.listen(8080,  function () {
-	console.log('Node.js listening on port 8080');
-});
-
+};
